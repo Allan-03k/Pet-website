@@ -1,5 +1,6 @@
 ## Project Overview
-## Figma Design Prototypes
+  - This is a full-stack pet adoption management system built on React + Flask, supporting user registration, pet browsing, questionnaire filling, adoption record management and
+  - administrator backend operations. Use Docker and Docker Compose for one-click deployment
 
 ## Local Setup Instructions
   - source venv/bin/activate
