@@ -1,0 +1,36 @@
+name: Backend CI Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+
+jobs:
+  backend-ci:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pylint pytest
+
+      - name: Lint backend with pylint
+        run: |
+          export PYTHONPATH=$(pwd)/backend
+          pylint backend/*.py --disable=R0801
+
+      - name: Run backend tests
+        run: |
+          export PYTHONPATH=$(pwd)/backend
+          cd backend
+          pytest
